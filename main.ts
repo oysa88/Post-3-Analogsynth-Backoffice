@@ -27,17 +27,26 @@ input.onButtonPressed(Button.A, function () {
     radio.sendString("D")
 })
 function Spille_på_flaskene () {
-    if (Synth == "A") {
-        basic.showString("A")
-        basic.pause(100)
-    } else if (Synth == "B") {
-        basic.showString("B")
-        basic.pause(100)
-    } else if (Synth == "C") {
+    if (Synth == "C") {
         basic.showString("C")
         basic.pause(100)
     } else if (Synth == "D") {
         basic.showString("D")
+        basic.pause(100)
+    } else if (Synth == "E") {
+        basic.showString("E")
+        basic.pause(100)
+    } else if (Synth == "F") {
+        basic.showString("F")
+        basic.pause(100)
+    } else if (Synth == "G") {
+        basic.showString("G")
+        basic.pause(100)
+    } else if (Synth == "A") {
+        basic.showString("A")
+        basic.pause(100)
+    } else if (Synth == "H") {
+        basic.showString("H")
         basic.pause(100)
     }
 }
@@ -71,12 +80,12 @@ radio.onReceivedString(function (receivedString) {
         fremskritt += 1
     } else {
         fremskritt = 0
-        if (Mottatt == 4) {
+        if (Mottatt == riktigSekvens.length) {
             FeilLøsning()
         }
     }
     // her havner vi når vi har mottat hele sekvensen i riktig rekkefølge
-    if (fremskritt == 4) {
+    if (fremskritt == riktigSekvens.length) {
         RiktigLøsning()
     }
 })
@@ -96,7 +105,7 @@ let Synth = ""
 let Lysstyrke = 0
 let Mottatt = 0
 let strip: neopixel.Strip = null
-let riktigSekvens: string[] = []
+let riktigSekvens = 0
 let fremskritt = 0
 fremskritt = 0
 riktigSekvens = ["C", "B", "A", "D"]
