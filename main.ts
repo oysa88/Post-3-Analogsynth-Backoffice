@@ -22,7 +22,7 @@ function RiktigLøsning () {
 }
 input.onButtonPressed(Button.A, function () {
     radio.sendString("C")
-    radio.sendString("B")
+    radio.sendString("H")
     radio.sendString("A")
     radio.sendString("D")
 })
@@ -91,9 +91,9 @@ radio.onReceivedString(function (receivedString) {
 })
 input.onButtonPressed(Button.B, function () {
     radio.sendString("C")
-    radio.sendString("B")
+    radio.sendString("H")
     radio.sendString("A")
-    radio.sendString("A")
+    radio.sendString("G")
 })
 function Initialize () {
     Lysstyrke = 255
@@ -108,7 +108,7 @@ let strip: neopixel.Strip = null
 let riktigSekvens: string[] = []
 let fremskritt = 0
 fremskritt = 0
-riktigSekvens = ["C", "B", "A", "D"]
+riktigSekvens = ["C", "H", "A", "D"]
 strip = neopixel.create(DigitalPin.P0, 16, NeoPixelMode.RGB)
 Mottatt = 0
 radio.setGroup(1)
