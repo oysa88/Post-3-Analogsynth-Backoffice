@@ -1,4 +1,5 @@
 function RiktigLøsning () {
+    soundExpression.giggle.play()
     Lysstyrke = 255
     for (let index = 0; index < 3; index++) {
         for (let index = 0; index < 20; index++) {
@@ -51,6 +52,7 @@ function Spille_på_flaskene () {
     }
 }
 function FeilLøsning () {
+    soundExpression.sad.play()
     Lysstyrke = 255
     for (let index = 0; index < 3; index++) {
         for (let index = 0; index < 20; index++) {
