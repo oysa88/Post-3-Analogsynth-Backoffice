@@ -1,4 +1,4 @@
-function wrong() {
+function wrong () {
     for (let m = 0; m <= 6; m++) {
         strip.setPixelColor(m, neopixel.rgb(255, 0, 0))
     }
@@ -18,7 +18,7 @@ function wrong() {
     completion = 0
     waitingForTimeout = false
 }
-function executeCommands() {
+function executeCommands () {
     serial.writeLine("EXECUTE")
     isExecuting = true
     numberOfCommands = commands.length
@@ -26,7 +26,7 @@ function executeCommands() {
     messageHasAlreadyFailed = false
     for (let index = 0; index < numberOfCommands; index++) {
         thisCommand = commands.shift()
-        serial.writeLine(thisCommand)
+        serial.writeLine("" + (thisCommand))
         for (let y = 0; y <= thisCommand.length - 1; y++) {
             thisSubCommand = thisCommand.substr(y, 1)
             // serial.writeLine(thisSubCommand)
@@ -93,7 +93,7 @@ function executeCommands() {
                 }
 
             }
-            strip.show()
+strip.show()
             basic.pause(playSpeed)
             if (thisSubCommand == correctSeq[completion]) {
                 completion += 1
@@ -117,7 +117,7 @@ function executeCommands() {
     messageHasAlreadyFailed = false
     serial.writeValue("numberOfCommandsAfter", numberOfCommands)
 }
-function handleCompletion(step: number) {
+function handleCompletion (step: number) {
     // for(let i = 0; i<step; i++){
     // strip.setPixelColor(i,neopixel.rgb(0, 255, 0))
     // }
@@ -129,7 +129,7 @@ function handleCompletion(step: number) {
         }
     }
 }
-function sendMonoMidi() {
+function sendMonoMidi () {
     if (myNote != 127) {
         midiChannel.noteOn(myNote)
         led.toggle(2, 2)
@@ -154,7 +154,7 @@ function sendMonoMidi() {
 input.onButtonPressed(Button.A, function () {
     playCorrectSeq()
 })
-function win() {
+function win () {
     for (let l = 0; l <= 6; l++) {
         strip.setPixelColor(l, neopixel.rgb(0, 255, 0))
     }
@@ -173,11 +173,11 @@ function win() {
     completion = 0
     radio.sendString("K")
 }
-function handlePinOuts() {
+function handlePinOuts () {
     pins.digitalWritePin(myPins[myNote], 1)
-    anOutputIsOn = true
+anOutputIsOn = true
 }
-function handleAltOutput() {
+function handleAltOutput () {
     if (!(catMuted)) {
         led.plot(altOutPut % 5, 0)
         led.plot(altOutPut % 5, 1)
@@ -195,7 +195,7 @@ input.onButtonPressed(Button.B, function () {
     win()
     wrong()
 })
-function playCorrectSeq() {
+function playCorrectSeq () {
     for (let k = 0; k <= correctSeqNumbers.length - 1; k++) {
         outPut = correctSeqNumbers[k]
         strip.setPixelColor(correctSeqPixels[k], neopixel.rgb(0, 255, 0))
@@ -206,7 +206,7 @@ function playCorrectSeq() {
         strip.show()
     }
 }
-function handleOutput() {
+function handleOutput () {
     if (!(mumMuted)) {
         led.plot(0, outPut % 5)
         led.plot(1, outPut % 5)
@@ -280,7 +280,7 @@ radio.onReceivedValue(function (name, value) {
         }
     }
 })
-function testStrip() {
+function testStrip () {
     strip.showRainbow(0, 0)
     strip.show()
     basic.pause(500)
@@ -296,21 +296,21 @@ radio.onReceivedString(function (name) {
         commands.push(name)
     }
 })
-function sendMonoMidiViaI2C(port: number) {
+function sendMonoMidiViaI2C (port: number) {
     // pins.digitalWritePin(DigitalPin.P4, port)
     if (myNote != 127) {
         myNote += noteOffset * port
         // led.toggleAll()
         // add 127 to tell proMicro that it is alt port
         pins.i2cWriteNumber(
-            0,
-            myNote + port * 127,
-            NumberFormat.Int8LE,
-            false
+        0,
+        myNote + port * 127,
+        NumberFormat.Int8LE,
+        false
         )
     }
 }
-function reset() {
+function reset () {
     wrong()
 }
 let receiveTime = 0
@@ -319,7 +319,6 @@ let myOnTimer = 0
 let altOutPut = 0
 let catMuted = false
 let anOutputIsOn = false
-let thisSubCommand = ""
 let thisCommand = ""
 let messageHasAlreadyFailed = false
 let commands: string[] = []
@@ -333,17 +332,20 @@ let correctSeqNumbers: number[] = []
 let correctSeq: string[] = []
 let myOnTime = 0
 let midiChannel: midi.MidiController = null
-let strip: neopixel.Strip = null
 let noteOffset = 0
-let alreadyCorrect: number[] = []
-let thisColour = 0
-let myPins: number[] = []
-let outPut = 0
-let myNote = 0
-let bitCheckMask = 0
-let MIDIoffset = 0
-let notes: number[] = []
+let list = 0
+let poly = false
 let chan = 0
+let notes: number[] = []
+let MIDIoffset = 0
+let bitCheckMask = 0
+let myNote = 0
+let outPut = 0
+let myPins: number[] = []
+let thisColour = 0
+let alreadyCorrect: number[] = []
+let strip: neopixel.Strip = null
+let thisSubCommand = ""
 radio.setGroup(3)
 let buttonPin = DigitalPin.P1
 // 1 = Zim, 0 = Zam
@@ -351,7 +353,6 @@ let altTrack = 1
 noteOffset = 12
 pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
 strip = neopixel.create(DigitalPin.P0, 7, NeoPixelMode.RGB)
-let poly = false
 basic.showLeds(`
     . . . . .
     . # . . .
@@ -365,14 +366,13 @@ midiChannel = midi.channel(1)
 midiChannel.setInstrument(MidiInstrument.AcousticGrandPiano)
 myOnTime = 15
 myPins = [
-    9,
-    15,
-    20,
-    21,
-    22,
-    23
+9,
+15,
+20,
+21,
+22,
+23
 ]
-let list = 0
 music.setTempo(200)
 let bufferTimer = 10
 let timeOut = 6000
@@ -384,31 +384,31 @@ let Gnum = 67
 let Anum = 69
 let Bnum = 71
 correctSeq = [
-    "C",
-    "F",
-    "A",
-    "E",
-    "G",
-    "D",
-    "C"
+"C",
+"F",
+"A",
+"E",
+"G",
+"D",
+"C"
 ]
 correctSeqNumbers = [
-    Cnum,
-    Fnum,
-    Anum,
-    Enum,
-    Gnum,
-    Dnum,
-    Cnum
+Cnum,
+Fnum,
+Anum,
+Enum,
+Gnum,
+Dnum,
+Cnum
 ]
 correctSeqPixels = [
-    0,
-    3,
-    5,
-    2,
-    4,
-    1,
-    0
+0,
+3,
+5,
+2,
+4,
+1,
+0
 ]
 playSpeed = 600
 basic.forever(function () {
